@@ -7,23 +7,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using static OHMI_Keeper_League.Enums.Enums;
 
 namespace OHMI_Keeper_League.Services
 {
     public class LeagueHistoryService : ILeagueHistoryService
     {
-        private static Configurations _config;
+        private IHttpClientWrapper _client;
         private static ExcelPackage _package;
+        private string _token;
         private Dictionary<string, Dictionary<string, PlayerModel>> _draftBoardsByYear;
         private Dictionary<string, Dictionary<int, List<string>>> _finalRostersByYear;
         private static Tuple<int, int> _keeperRangeStart = new Tuple<int, int>(19, 1);
         private static Tuple<int, int> _keeperRangeEnd = new Tuple<int, int>(21, 12);
 
-        public LeagueHistoryService(Configurations config)
+        public LeagueHistoryService(IHttpClientWrapper client)
         {
-            _config = config;
-
+            _client = client;
             Setup();
         }
 
@@ -142,11 +143,12 @@ namespace OHMI_Keeper_League.Services
             _package.Save();
         }
 
-        public void AddKeeperValues()
+        public async Task AddKeeperValues()
         {
+            _token = await _client.RefreshAuthorization();
+
             foreach (ExcelWorksheet tab in _package.Workbook.Worksheets)
             {
-                Dictionary<int, List<string>> currentFinalRoster = new Dictionary<int, List<string>>();
                 string year = tab.Name;
 
                 for (int keeperCount = _keeperRangeStart.Item1; keeperCount <= _keeperRangeEnd.Item1; keeperCount++)

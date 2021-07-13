@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "OHMI Keeper League": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "CODE": "j23rmv4",
+        "APP_ID": "iurhMuv5",
+        "CLIENT_SECRET": "c3138c80374680c8e7e05f7132e8608e9942cfda",
+        "ENCODED_AUTHORIZATION": "ZGoweUptazlSalpoYTFGWFVUUjNabUppSm1ROVdWZHJPV0ZZVm5saFJURXhaR3BWYldOSGJ6bE5RVDA5Sm5NOVkyOXVjM1Z0WlhKelpXTnlaWFFtYzNZOU1DWjRQVGxsOmMzMTM4YzgwMzc0NjgwYzhlN2UwNWY3MTMyZTg2MDhlOTk0MmNmZGE=",
+        "CLIENT_ID": "dj0yJmk9RjZha1FXUTR3ZmJiJmQ9WVdrOWFYVnlhRTExZGpVbWNHbzlNQT09JnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PTll",
+        "REFRESH_TOKEN": "AL8T2mBIJ0_I9P_BANttRkirk1rXuCt8wTRkgeC2vJAsEvad5cj5YjNXcK5Gv.mn"
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ using OHMI_Keeper_League.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OHMI_Keeper_League
 {
@@ -15,11 +16,11 @@ namespace OHMI_Keeper_League
             _leagueHistoryService = leagueHistoryService;
         }
 
-        public void Run()
+        public async Task Run()
         {
             if (Configurations.ShouldRunLeagueHistoryService)
             {
-                _leagueHistoryService.AddKeeperValues();
+                await _leagueHistoryService.AddKeeperValues();
             }
         }
     }

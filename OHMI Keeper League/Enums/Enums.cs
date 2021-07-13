@@ -21,5 +21,14 @@ namespace OHMI_Keeper_League.Enums
             BRIENGARVEY,
             BOBBYWILLEN
         }
+
+        public enum ApiType
+        {
+            Post,
+            Get,
+            Delete,
+            Put,
+            Patch
+        }
     }
 }

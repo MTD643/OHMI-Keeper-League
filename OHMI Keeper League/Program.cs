@@ -12,15 +12,17 @@ namespace OHMI_Keeper_League
         static void Main(string[] args)
         {
             ServiceProvider serviceProvider = new ServiceCollection()
+                .AddHttpClient()
                 .AddScoped<Configurations, Configurations>()
                 .AddScoped<ILeagueHistoryService, LeagueHistoryService>()
                 .AddScoped<IOrchestrator, Orchestrator>()
+                .AddScoped<IHttpClientWrapper, HttpClientWrapper>()
                 .BuildServiceProvider();
 
             try
             {
                 IOrchestrator orchestrator = serviceProvider.GetService<IOrchestrator>();
-                orchestrator.Run();
+                orchestrator.Run();//.GetAwaiter().GetResult();
             }
             catch (Exception ex)
             {
