@@ -71,7 +71,7 @@ namespace OHMI_Keeper_League.Services
 
                             PlayerModel playerModel = new PlayerModel(playerName, roundNumber, tab.Cells[2, managerNumber].Value.ToString(), year);
 
-                            currentDraftBoard.Add(playerName, playerModel);
+                            currentDraftBoard.Add(playerName.Replace("'", "").ToUpper(), playerModel);
                         }
                     }
                 }
@@ -104,7 +104,7 @@ namespace OHMI_Keeper_League.Services
                         var value = tab.Cells[roundNumber, managerNumber].Value;
                         string playerName = (value == null ? "" : value.ToString());
 
-                        playersDrafted.Add(playerName);
+                        playersDrafted.Add(playerName.Replace("'", "").ToUpper());
 
                         if (!string.IsNullOrWhiteSpace(playerName))
                         {
@@ -116,7 +116,7 @@ namespace OHMI_Keeper_League.Services
 
                             Dictionary<string, PlayerModel> currentDraftBoard = _draftBoardsByYear[year];
 
-                            if (currentDraftBoard.TryGetValue(playerName, out PlayerModel playerModel))
+                            if (currentDraftBoard.TryGetValue(playerName.Replace("'", "").ToUpper(), out PlayerModel playerModel))
                             {
                                 if (playerModel.RoundDrafted > 2)
                                 {

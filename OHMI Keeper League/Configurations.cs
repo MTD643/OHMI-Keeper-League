@@ -7,10 +7,11 @@ namespace OHMI_Keeper_League
     public class Configurations
     {
         // APP SETTINGS
-        public const bool ShouldRunLeagueHistoryService = true;
+        public const bool ShouldRunLeagueHistoryService = false;
 
         //CONSTANTS
         public const string FileName = @"OHMI Keeper League History.xlsx";
+        public const string ADPFileName = @"2021 ADP.xlsx";
         public const string LeagueId = "223.l.79105";
     }
 }

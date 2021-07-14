@@ -15,6 +15,7 @@ namespace OHMI_Keeper_League
                 .AddHttpClient()
                 .AddScoped<Configurations, Configurations>()
                 .AddScoped<ILeagueHistoryService, LeagueHistoryService>()
+                .AddScoped<IADPCalculator, ADPCalculator>()
                 .AddScoped<IOrchestrator, Orchestrator>()
                 .AddScoped<IHttpClientWrapper, HttpClientWrapper>()
                 .BuildServiceProvider();

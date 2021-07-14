@@ -10,5 +10,10 @@ namespace OHMI_Keeper_League
         {
             return !string.IsNullOrWhiteSpace(str);
         }
+
+        public static string CleanupName(this string str)
+        {
+            return str.Replace("'", "").Replace(" III", "").Replace(" II", "").Replace(" IV", "").Replace(" Jr.", "").Replace(" Sr.", "").Replace(".", "").Replace("-", "").Trim().ToUpper();
+        }
     }
 }

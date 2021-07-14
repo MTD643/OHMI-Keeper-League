@@ -12,6 +12,7 @@ namespace OHMI_Keeper_League.Models
         public Manager OwnedBy { get; set; }
         public string DraftYear { get; set; }
         public bool IsKeeper { get; set; }
+        public double ADP { get; set; }
         public int YearsKeptByCurrentManager { get; set; }
 
         public PlayerModel(string playerName, int roundDrafted, string managerName, string draftYear)
