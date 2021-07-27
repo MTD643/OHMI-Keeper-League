@@ -2,8 +2,10 @@
 using OfficeOpenXml;
 using OHMI_Keeper_League.Interfaces;
 using OHMI_Keeper_League.Services;
+using OHMI_Keeper_League.DAL;
 using System;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace OHMI_Keeper_League
 {
@@ -18,6 +20,8 @@ namespace OHMI_Keeper_League
                 .AddScoped<IADPCalculator, ADPCalculator>()
                 .AddScoped<IOrchestrator, Orchestrator>()
                 .AddScoped<IHttpClientWrapper, HttpClientWrapper>()
+                .AddScoped<IDataAccessLayer, DataAccessLayer>()
+                .AddDbContext<OHMIKeeperLeagueContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("CONN_STRING")))
                 .BuildServiceProvider();
 
             try

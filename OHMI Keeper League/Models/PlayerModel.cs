@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static OHMI_Keeper_League.Enums.Enums;
 
+
 namespace OHMI_Keeper_League.Models
 {
     public class PlayerModel

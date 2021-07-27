@@ -30,5 +30,15 @@ namespace OHMI_Keeper_League.Enums
             Put,
             Patch
         }
+
+        public enum PlayerPosition
+        {
+            QB,
+            RB,
+            WR,
+            TE,
+            K,
+            DST
+        }
     }
 }

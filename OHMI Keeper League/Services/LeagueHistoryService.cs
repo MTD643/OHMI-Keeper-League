@@ -1,5 +1,7 @@
-﻿using OfficeOpenXml;
+﻿using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using OfficeOpenXml.Table;
+using OHMI_Keeper_League.DAL;
 using OHMI_Keeper_League.Interfaces;
 using OHMI_Keeper_League.Models;
 using System;
@@ -8,12 +10,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static OHMI_Keeper_League.Enums.Enums;
 
 namespace OHMI_Keeper_League.Services
 {
     public class LeagueHistoryService : ILeagueHistoryService
     {
+        private readonly OHMIKeeperLeagueContext _dbContext;
         private IHttpClientWrapper _client;
         private static ExcelPackage _package;
         private string _token;
@@ -22,8 +24,9 @@ namespace OHMI_Keeper_League.Services
         private static Tuple<int, int> _keeperRangeStart = new Tuple<int, int>(19, 1);
         private static Tuple<int, int> _keeperRangeEnd = new Tuple<int, int>(21, 12);
 
-        public LeagueHistoryService(IHttpClientWrapper client)
+        public LeagueHistoryService(IHttpClientWrapper client, OHMIKeeperLeagueContext dbContext)
         {
+            _dbContext = dbContext;
             _client = client;
             Setup();
         }
@@ -34,8 +37,8 @@ namespace OHMI_Keeper_League.Services
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             _package = new ExcelPackage(file);
 
-            GetDraftBoards();
-            GetFinalRosters();
+            //GetDraftBoards();
+            //GetFinalRosters();
         }
 
         void GetDraftBoards()
@@ -145,7 +148,7 @@ namespace OHMI_Keeper_League.Services
 
         public async Task AddKeeperValues()
         {
-            _token = await _client.RefreshAuthorization();
+            //_token = await _client.RefreshAuthorization();
 
             foreach (ExcelWorksheet tab in _package.Workbook.Worksheets)
             {
@@ -196,9 +199,91 @@ namespace OHMI_Keeper_League.Services
             _package.Save();
         }
 
+        void AddManagersToDB()
+        {
+            List<Manager> managers = new List<Manager>()
+            {
+                new Manager
+                {
+                    FullName = "Michael Doney",
+                    EmailAddress = "michaeldoney@comcast.net",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Tom Doney",
+                    EmailAddress = "tomdoney@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Gail Doney",
+                    EmailAddress = "gaildoney@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Lunden Carpenter",
+                    EmailAddress = "lundcarp@umich.edu",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Roger Samson",
+                    EmailAddress = "rogerpsamson@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Jenny Jacob",
+                    EmailAddress = "jenny.jacob@hansoninc.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "George Jacob",
+                    EmailAddress = "345george345@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Torin Carpenter",
+                    EmailAddress = "carpentert15@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Bobby Willen",
+                    EmailAddress = "willenr@mail.gvsu.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Thomas Marine",
+                    EmailAddress = "thomas.marine42@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Andrew Giza",
+                    EmailAddress = "acgiza@aol.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+                new Manager
+                {
+                    FullName = "Brien Garvey",
+                    EmailAddress = "brien.garvey@gmail.com",
+                    StartDate = new DateTime(2019, 8, 13)
+                },
+            };
+
+            _dbContext.Managers.AddRange(managers);
+            _dbContext.SaveChanges();
+        }
+
         public void SubmitKeepers(Manager manager, string playerName, string year)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SubmitManagersDraft(Manager manager, List<string> playersDraftedInOrder, string year)

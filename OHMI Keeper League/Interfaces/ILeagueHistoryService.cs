@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OHMI_Keeper_League.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using static OHMI_Keeper_League.Enums.Enums;
 
 namespace OHMI_Keeper_League.Interfaces
 {

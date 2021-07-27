@@ -3,6 +3,7 @@
     "OHMI Keeper League": {
       "commandName": "Project",
       "environmentVariables": {
+        "CONN_STRING": "Server=localhost;Database=OHMI Keeper League;Trusted_Connection=True;",
         "CODE": "j23rmv4",
         "APP_ID": "iurhMuv5",
         "CLIENT_SECRET": "c3138c80374680c8e7e05f7132e8608e9942cfda",
